@@ -7,3 +7,20 @@ build
 nbactions.xml
 nb-configuration.xml
 nbproject/
+
+# Arcads skill pack
+.env
+.env.*
+!.env.example
+MASTER_CONTEXT.md
+.claude/skills/
+.claude/worktrees/
+.claude/settings.local.json
+.cursor/skills/
+outputs/
+output/
+*.mp4
+*.mov
+*.mkv
+*.avi
+*.webm
