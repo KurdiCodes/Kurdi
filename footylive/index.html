@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="description" content="FootyLive.ca — Canada's sports data hub. Live scores, standings, transfers, rankings and match stats.">
+<title>FootyLive.ca — Live Scores, Transfers & Sports News</title>
+<link rel="stylesheet" href="styles.css">
+<link rel="icon" href="Favicon/favicon.ico">
+<link rel="apple-touch-icon" href="Favicon/favicon.ico">
+<link rel="canonical" href="https://footylive.ca/">
+<meta name="robots" content="index, follow">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7185883198228094"
+     crossorigin="anonymous"></script>
+     
+</head>
+<body>
+
+<div class="shell">
+
+  <!-- ══════════════════════════════
+       SIDEBAR NAVIGATION
+  ══════════════════════════════ -->
+  <nav class="sidenav" id="sidenav">
+    <div class="nav-logo" onclick="navigate('home')">
+      <div class="nav-logo-mark">⚽</div>
+      <div class="nav-logo-text">Footy<em>Live</em>.ca</div>
+    </div>
+
+    <div class="nav-links">
+      <span class="nav-section-label">Live</span>
+      <div class="nav-item active" id="nav-home"      onclick="navigate('home')">
+        <span class="ni-icon">🏠</span><span class="ni-label">Home</span>
+        <span class="ni-badge" id="livePill" style="display:none">LIVE</span>
+      </div>
+      <div class="nav-item" id="nav-scores"    onclick="navigate('scores')">
+        <span class="ni-icon">📊</span><span class="ni-label">Live Scores</span>
+      </div>
+
+      <span class="nav-section-label">Results</span>
+      <div class="nav-item" id="nav-schedule"  onclick="navigate('schedule')">
+        <span class="ni-icon">📅</span><span class="ni-label">Schedule</span>
+      </div>
+      <div class="nav-item" id="nav-standings" onclick="navigate('standings')">
+        <span class="ni-icon">🏆</span><span class="ni-label">Standings</span>
+      </div>
+      <div class="nav-item" id="nav-transfers" onclick="navigate('transfers')">
+        <span class="ni-icon">🔄</span><span class="ni-label">Transfers</span>
+      </div>
+
+      <span class="nav-section-label">Leagues</span>
+      <div class="nav-item" id="nav-league-epl" onclick="navigateLeague('epl')">
+        <span class="ni-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span><span class="ni-label">Premier League</span>
+      </div>
+      <div class="nav-item" id="nav-league-laliga" onclick="navigateLeague('laliga')">
+        <span class="ni-icon">🇪🇸</span><span class="ni-label">La Liga</span>
+      </div>
+      <div class="nav-item" id="nav-league-bundesliga" onclick="navigateLeague('bundesliga')">
+        <span class="ni-icon">🇩🇪</span><span class="ni-label">Bundesliga</span>
+      </div>
+      <div class="nav-item" id="nav-league-seriea" onclick="navigateLeague('seriea')">
+        <span class="ni-icon">🇮🇹</span><span class="ni-label">Serie A</span>
+      </div>
+      <div class="nav-item" id="nav-league-ligue1" onclick="navigateLeague('ligue1')">
+        <span class="ni-icon">🇫🇷</span><span class="ni-label">Ligue 1</span>
+      </div>
+      <div class="nav-item" id="nav-league-ucl" onclick="navigateLeague('ucl')">
+        <span class="ni-icon">🏆</span><span class="ni-label">Champions League</span>
+      </div>
+      <div class="nav-item" id="nav-league-mls" onclick="navigateLeague('mls')">
+        <span class="ni-icon">🇺🇸</span><span class="ni-label">MLS</span>
+      </div>
+
+      <span class="nav-section-label">Explore</span>
+      <div class="nav-item" id="nav-rankings"  onclick="navigate('rankings')">
+        <span class="ni-icon">📈</span><span class="ni-label">Rankings</span>
+      </div>
+      <div class="nav-item" id="nav-calendar"  onclick="navigate('calendar')">
+        <span class="ni-icon">📆</span><span class="ni-label">Calendar</span>
+      </div>
+      <div class="nav-item" id="nav-highlights" onclick="navigate('highlights')">
+        <span class="ni-icon">🎬</span><span class="ni-label">Highlights</span>
+      </div>
+    </div>
+
+    <div class="nav-footer">
+      <p>© 2026 FootyLive.ca<br>Canada's sports hub.</p>
+    </div>
+  </nav>
+
+  <!-- ══════════════════════════════
+       MAIN CONTENT
+  ══════════════════════════════ -->
+  <div class="main">
+
+    <!-- Top bar -->
+    <div class="topbar">
+      <div class="topbar-title" id="topbarTitle">Live <span>Scores</span></div>
+
+      <div class="search-wrap">
+        <input class="search-input" id="searchInput" type="text"
+          placeholder="Search players, teams, leagues…"
+          autocomplete="off"
+          oninput="onSearchInput(this.value)"
+          onblur="setTimeout(closeSearch,200)"
+          onfocus="if(this.value.length>1)openSearch()">
+        <span class="search-icon">⌕</span>
+        <div class="search-dropdown" id="searchDropdown"></div>
+      </div>
+    </div>
+
+    <!-- Ticker -->
+    <div class="ticker-bar">
+      <div class="ticker-track" id="ticker">
+        <span class="ticker-item">⚽ FootyLive.ca — Live scores &amp; standings <span class="ticker-dot"></span></span>
+        <span class="ticker-item">📈 Rankings · 📆 Calendar · 🔄 Transfers <span class="ticker-dot"></span></span>
+        <span class="ticker-item">🔍 Search players, teams &amp; leagues above <span class="ticker-dot"></span></span>
+        <span class="ticker-item">⚽ FootyLive.ca — Live scores &amp; standings <span class="ticker-dot"></span></span>
+        <span class="ticker-item">📈 Rankings · 📆 Calendar · 🔄 Transfers <span class="ticker-dot"></span></span>
+        <span class="ticker-item">🔍 Search players, teams &amp; leagues above <span class="ticker-dot"></span></span>
+      </div>
+    </div>
+
+    <div class="page-content">
+
+      <!-- ══════════════════════════════
+           HOME PAGE
+      ══════════════════════════════ -->
+      <div class="page active" id="page-home">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Live <span>Scores</span></h2>
+            <p id="homeLiveCount">Select a sport below to see live matches</p>
+          </div>
+          <div id="homeLiveBadge"></div>
+        </div>
+
+        <!-- Ad strip (thin, not obtrusive) -->
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+
+        <!-- Sport selector -->
+        <div class="sport-strip" id="homeSportFilter">
+          <div class="sport-pill active" onclick="setHomeSport(this,'football')"><span class="sp-icon">⚽</span>Football</div>
+          <div class="sport-pill" onclick="setHomeSport(this,'basketball')"><span class="sp-icon">🏀</span>Basketball</div>
+          <div class="sport-pill" onclick="setHomeSport(this,'ice-hockey')"><span class="sp-icon">🏒</span>Hockey</div>
+          <div class="sport-pill" onclick="setHomeSport(this,'american-football')"><span class="sp-icon">🏈</span>NFL</div>
+          <div class="sport-pill" onclick="setHomeSport(this,'baseball')"><span class="sp-icon">⚾</span>Baseball</div>
+          <div class="sport-pill" onclick="setHomeSport(this,'cricket')"><span class="sp-icon">🏏</span>Cricket</div>
+          <div class="sport-pill" onclick="setHomeSport(this,'tennis')"><span class="sp-icon">🎾</span>Tennis</div>
+        </div>
+        <section class="match-filter-panel" aria-label="Home match filters">
+
+          <!-- Row 1: Status pills -->
+          <div class="filter-section">
+            <div class="filter-section-label">Status</div>
+            <div class="status-pills" id="homeStatusFilter">
+              <button class="status-pill active" onclick="setMatchStatusFilter('home',this,'all')">All Games</button>
+              <button class="status-pill status-pill-live" onclick="setMatchStatusFilter('home',this,'live')"><span class="live-dot"></span>Live Now</button>
+              <button class="status-pill" onclick="setMatchStatusFilter('home',this,'upcoming')">Upcoming</button>
+            </div>
+          </div>
+
+          <!-- Row 2: Quick league buttons (top 5) -->
+          <div class="filter-section">
+            <div class="filter-section-label">Top Leagues</div>
+            <div class="quick-leagues" id="homeQuickLeagues">
+              <button class="quick-league-btn" onclick="setQuickLeague('home',this,'premier league')">
+                <span class="ql-flag">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+                <span class="ql-name">Premier League</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('home',this,'bundesliga')">
+                <span class="ql-flag">🇩🇪</span>
+                <span class="ql-name">Bundesliga</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('home',this,'la liga')">
+                <span class="ql-flag">🇪🇸</span>
+                <span class="ql-name">La Liga</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('home',this,'serie a')">
+                <span class="ql-flag">🇮🇹</span>
+                <span class="ql-name">Serie A</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('home',this,'ligue 1')">
+                <span class="ql-flag">🇫🇷</span>
+                <span class="ql-name">Ligue 1</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Row 3: All leagues dropdown -->
+          <div class="filter-section filter-section-select">
+            <div class="filter-section-label">All Leagues</div>
+            <div class="league-select-wrap">
+              <select class="league-select" id="homeLeagueFilter" onchange="setMatchLeagueFilterSelect('home',this)">
+                <option value="all">— Show All Leagues —</option>
+              </select>
+              <svg class="league-select-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- Two-col: matches + sidebar -->
+        <div class="home-layout">
+          <div id="homeLiveBox">
+            <div class="loading-state"><div class="spinner"></div><div>Loading live matches…</div></div>
+          </div>
+          <aside class="home-sidebar">
+            <div class="widget">
+              <div class="widget-hd">
+                <div class="widget-title">EPL <span>Table</span></div>
+                <span class="widget-link" onclick="navigate('standings')">Full →</span>
+              </div>
+              <div class="widget-body" id="homeStandBox">
+                <div class="loading-state" style="padding:1rem"><div class="spinner"></div></div>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="widget-hd"><div class="widget-title">Top <span>Scorers</span></div></div>
+              <div class="widget-body" id="homeScorersBox">
+                <div class="loading-state" style="padding:1rem"><div class="spinner"></div></div>
+              </div>
+            </div>
+            <div class="ad-slot" style="min-height:240px"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICcwMzE5ZjU4YmQzZTMyMGM5NjUxZGVkOGU1YTVjMWVkMScsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiAyNTAsCiAgICAnd2lkdGgnIDogMzAwLAogICAgJ3BhcmFtcycgOiB7fQogIH07Cjwvc2NyaXB0Pgo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jb25kdWN0aXZlYnJlZWRzLmNvbS8wMzE5ZjU4YmQzZTMyMGM5NjUxZGVkOGU1YTVjMWVkMS9pbnZva2UuanMiPjwvc2NyaXB0Pgo=")); </script></span></div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           SCORES PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-scores">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2><span>Live</span> Scores</h2>
+            <p>Real-time results across all sports</p>
+          </div>
+          <div id="scoresLiveBadge"></div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <div class="sport-strip" id="scoresSportFilter">
+          <div class="sport-pill active" onclick="filterScoresSport(this,'football')"><span class="sp-icon">⚽</span>Football</div>
+          <div class="sport-pill" onclick="filterScoresSport(this,'basketball')"><span class="sp-icon">🏀</span>Basketball</div>
+          <div class="sport-pill" onclick="filterScoresSport(this,'ice-hockey')"><span class="sp-icon">🏒</span>Hockey</div>
+          <div class="sport-pill" onclick="filterScoresSport(this,'american-football')"><span class="sp-icon">🏈</span>NFL</div>
+          <div class="sport-pill" onclick="filterScoresSport(this,'baseball')"><span class="sp-icon">⚾</span>Baseball</div>
+          <div class="sport-pill" onclick="filterScoresSport(this,'cricket')"><span class="sp-icon">🏏</span>Cricket</div>
+        </div>
+        <section class="match-filter-panel" aria-label="Scores match filters">
+
+          <!-- Row 1: Status pills -->
+          <div class="filter-section">
+            <div class="filter-section-label">Status</div>
+            <div class="status-pills" id="scoresStatusFilter">
+              <button class="status-pill active" onclick="setMatchStatusFilter('scores',this,'all')">All Games</button>
+              <button class="status-pill status-pill-live" onclick="setMatchStatusFilter('scores',this,'live')"><span class="live-dot"></span>Live Now</button>
+              <button class="status-pill" onclick="setMatchStatusFilter('scores',this,'upcoming')">Upcoming</button>
+            </div>
+          </div>
+
+          <!-- Row 2: Quick league buttons (top 5) -->
+          <div class="filter-section">
+            <div class="filter-section-label">Top Leagues</div>
+            <div class="quick-leagues" id="scoresQuickLeagues">
+              <button class="quick-league-btn" onclick="setQuickLeague('scores',this,'premier league')">
+                <span class="ql-flag">🏴</span>
+                <span class="ql-name">Premier League</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('scores',this,'bundesliga')">
+                <span class="ql-flag">🇩🇪</span>
+                <span class="ql-name">Bundesliga</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('scores',this,'la liga')">
+                <span class="ql-flag">🇪🇸</span>
+                <span class="ql-name">La Liga</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('scores',this,'serie a')">
+                <span class="ql-flag">🇮🇹</span>
+                <span class="ql-name">Serie A</span>
+              </button>
+              <button class="quick-league-btn" onclick="setQuickLeague('scores',this,'ligue 1')">
+                <span class="ql-flag">🇫🇷</span>
+                <span class="ql-name">Ligue 1</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Row 3: All leagues dropdown -->
+          <div class="filter-section filter-section-select">
+            <div class="filter-section-label">All Leagues</div>
+            <div class="league-select-wrap">
+              <select class="league-select" id="scoresLeagueFilter" onchange="setMatchLeagueFilterSelect('scores',this)">
+                <option value="all">— Show All Leagues —</option>
+              </select>
+              <svg class="league-select-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5 7.5L10 12.5L15 7.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          </div>
+
+        </section>
+        <div id="scoresBox"></div>
+      </div>
+
+      <!-- ══════════════════════════════
+           SCHEDULE PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-schedule">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Match <span>Schedule</span></h2>
+            <p id="schedSubTitle">Today's fixtures</p>
+          </div>
+          <div class="page-hd-controls">
+            <div class="date-nav">
+              <button class="date-arrow" onclick="shiftDate(-1)">◀</button>
+              <span class="date-label" id="dateDisplay"></span>
+              <button class="date-arrow" onclick="shiftDate(1)">▶</button>
+              <button class="date-today" id="todayBtn" onclick="goToday()">Today</button>
+            </div>
+            <div class="toggle-pair">
+              <button class="toggle-btn active" id="btnUpcoming" onclick="setSchedMode(this,'scheduled')">Upcoming</button>
+              <button class="toggle-btn" id="btnResults" onclick="setSchedMode(this,'results')">Results</button>
+            </div>
+          </div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <div class="sport-strip" id="schedSportFilter">
+          <div class="sport-pill active" onclick="filterSchedSport(this,'football')"><span class="sp-icon">⚽</span>Football</div>
+          <div class="sport-pill" onclick="filterSchedSport(this,'basketball')"><span class="sp-icon">🏀</span>Basketball</div>
+          <div class="sport-pill" onclick="filterSchedSport(this,'ice-hockey')"><span class="sp-icon">🏒</span>Hockey</div>
+          <div class="sport-pill" onclick="filterSchedSport(this,'american-football')"><span class="sp-icon">🏈</span>NFL</div>
+          <div class="sport-pill" onclick="filterSchedSport(this,'baseball')"><span class="sp-icon">⚾</span>Baseball</div>
+          <div class="sport-pill" onclick="filterSchedSport(this,'cricket')"><span class="sp-icon">🏏</span>Cricket</div>
+        </div>
+        <div id="schedBox"></div>
+      </div>
+
+      <!-- ══════════════════════════════
+           TRANSFERS PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-transfers">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Transfer <span>News</span></h2>
+            <p id="transferCountBadge">Latest transfer activity</p>
+          </div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <div class="filter-row" id="transferFilter">
+          <button class="filter-btn active" onclick="filterTransfers(this,'all')">All</button>
+          <button class="filter-btn" onclick="filterTransfers(this,'permanent')">✅ Permanent</button>
+          <button class="filter-btn" onclick="filterTransfers(this,'loan')">🔄 Loan</button>
+          <button class="filter-btn" onclick="filterTransfers(this,'free')">📋 Free / Expired</button>
+        </div>
+        <div id="transferBox"></div>
+      </div>
+
+      <!-- ══════════════════════════════
+           STANDINGS PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-standings">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>League <span>Standings</span></h2>
+            <p>Click any team to view profile</p>
+          </div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <div class="sport-strip" id="standingsLeagueFilter">
+          <div class="sport-pill active" onclick="loadStandings(this,17,'Premier League')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 EPL</div>
+          <div class="sport-pill" onclick="loadStandings(this,8,'La Liga')">🇪🇸 La Liga</div>
+          <div class="sport-pill" onclick="loadStandings(this,35,'Bundesliga')">🇩🇪 Bundesliga</div>
+          <div class="sport-pill" onclick="loadStandings(this,23,'Serie A')">🇮🇹 Serie A</div>
+          <div class="sport-pill" onclick="loadStandings(this,34,'Ligue 1')">🇫🇷 Ligue 1</div>
+          <div class="sport-pill" onclick="loadStandings(this,7,'Champions League')">🏆 UCL</div>
+          <div class="sport-pill" onclick="loadStandings(this,242,'MLS')">🇺🇸 MLS</div>
+        </div>
+        <div class="standings-layout" id="standingsLayout">
+          <div id="standingsBox"></div>
+          <aside>
+            <div class="widget">
+              <div class="widget-hd"><div class="widget-title">Top <span>Scorers</span></div></div>
+              <div class="widget-body" id="standScorersBox">
+                <div class="loading-state" style="padding:1rem"><div class="spinner"></div></div>
+              </div>
+            </div>
+            <div class="ad-slot" style="min-height:240px;margin-top:1.2rem"><span>📢 300×250 Ad</span></div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           RANKINGS PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-rankings">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Sport <span>Rankings</span></h2>
+            <p>FIFA, Tennis, ATP/WTA &amp; more</p>
+          </div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <div class="sport-strip" id="rankingsCatFilter">
+          <div class="sport-pill active" onclick="loadRankings(this,'football')"><span class="sp-icon">⚽</span>FIFA</div>
+          <div class="sport-pill" onclick="loadRankings(this,'tennis')"><span class="sp-icon">🎾</span>ATP Tennis</div>
+        </div>
+        <div id="rankingsBox"></div>
+      </div>
+
+      <!-- ══════════════════════════════
+           CALENDAR PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-calendar">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Event <span>Calendar</span></h2>
+            <p id="calMonthDisplay"></p>
+          </div>
+          <div class="page-hd-controls">
+            <div class="date-nav">
+              <button class="date-arrow" onclick="shiftCal(-1)">◀</button>
+              <button class="date-arrow" onclick="shiftCal(1)">▶</button>
+            </div>
+            <div class="sport-strip" id="calSportFilter" style="margin-bottom:0">
+              <div class="sport-pill active" onclick="filterCalSport(this,'tennis')"><span class="sp-icon">🎾</span>Tennis</div>
+              <div class="sport-pill" onclick="filterCalSport(this,'football')"><span class="sp-icon">⚽</span>Football</div>
+            </div>
+          </div>
+        </div>
+        <div class="standings-layout">
+          <div>
+            <div id="calGrid"></div>
+            <div id="calEvents" style="margin-top:1rem"></div>
+          </div>
+          <aside>
+            <div class="widget">
+              <div class="widget-hd"><div class="widget-title">📺 <span>TV Canada</span></div></div>
+              <div class="widget-body" id="tvBox">
+                <div class="loading-state" style="padding:1rem"><div class="spinner"></div></div>
+              </div>
+            </div>
+            <div class="ad-slot" style="min-height:240px;margin-top:1.2rem"><span>📢 300×250 Ad</span></div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           SEARCH RESULTS PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-search">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Results for: <span id="searchPageQuery">…</span></h2>
+          </div>
+        </div>
+        <div class="filter-row" id="searchTypeFilter">
+          <button class="filter-btn active" onclick="filterSearchType(this,'all')">All</button>
+          <button class="filter-btn" onclick="filterSearchType(this,'players')">👤 Players</button>
+          <button class="filter-btn" onclick="filterSearchType(this,'teams')">🏟 Teams</button>
+          <button class="filter-btn" onclick="filterSearchType(this,'tournaments')">🏆 Leagues</button>
+          <button class="filter-btn" onclick="filterSearchType(this,'referees')">🟡 Referees</button>
+          <button class="filter-btn" onclick="filterSearchType(this,'managers')">👔 Managers</button>
+        </div>
+        <div id="searchPageBox"></div>
+      </div>
+
+      <!-- ══════════════════════════════
+           LEAGUE PAGE (shared, dynamic)
+      ══════════════════════════════ -->
+      <div class="page" id="page-league">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2 id="leaguePageTitle">League <span>Fixtures</span></h2>
+            <p id="leaguePageSub">Today's matches &amp; standings</p>
+          </div>
+          <div class="page-hd-controls">
+            <div class="date-nav">
+              <button class="date-arrow" onclick="shiftLeagueDate(-1)">◀</button>
+              <span class="date-label" id="leagueDateDisplay"></span>
+              <button class="date-arrow" onclick="shiftLeagueDate(1)">▶</button>
+              <button class="date-today" id="leagueTodayBtn" onclick="goLeagueToday()">Today</button>
+            </div>
+            <div class="toggle-pair">
+              <button class="toggle-btn active" id="leagueBtnUpcoming" onclick="setLeagueMode(this,'scheduled')">Upcoming</button>
+              <button class="toggle-btn" id="leagueBtnResults" onclick="setLeagueMode(this,'results')">Results</button>
+            </div>
+          </div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <div class="home-layout">
+          <div id="leagueFixturesBox">
+            <div class="loading-state"><div class="spinner"></div><div>Loading fixtures…</div></div>
+          </div>
+          <aside class="home-sidebar">
+            <div class="widget">
+              <div class="widget-hd">
+                <div class="widget-title" id="leagueStandTitle">League <span>Table</span></div>
+                <span class="widget-link" onclick="navigate('standings')">Full →</span>
+              </div>
+              <div class="widget-body" id="leagueStandBox">
+                <div class="loading-state" style="padding:1rem"><div class="spinner"></div></div>
+              </div>
+            </div>
+            <div class="widget">
+              <div class="widget-hd"><div class="widget-title">Top <span>Scorers</span></div></div>
+              <div class="widget-body" id="leagueScorersBox">
+                <div class="loading-state" style="padding:1rem"><div class="spinner"></div></div>
+              </div>
+            </div>
+            <div class="ad-slot" style="min-height:240px"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICcwMzE5ZjU4YmQzZTMyMGM5NjUxZGVkOGU1YTVjMWVkMScsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiAyNTAsCiAgICAnd2lkdGgnIDogMzAwLAogICAgJ3BhcmFtcycgOiB7fQogIH07Cjwvc2NyaXB0Pgo8c2NyaXB0IHNyYz0iaHR0cHM6Ly9jb25kdWN0aXZlYnJlZWRzLmNvbS8wMzE5ZjU4YmQzZTMyMGM5NjUxZGVkOGU1YTVjMWVkMS9pbnZva2UuanMiPjwvc2NyaXB0Pgo=")); </script></span></div>
+          </aside>
+        </div>
+      </div>
+
+      <!-- ══════════════════════════════
+           HIGHLIGHTS PAGE
+      ══════════════════════════════ -->
+      <div class="page" id="page-highlights">
+        <div class="page-hd">
+          <div class="page-hd-left">
+            <h2>Soccer <span>Highlights</span></h2>
+            <p>Daily highlights from top football channels — click any video to watch</p>
+          </div>
+        </div>
+        <div class="ad-slot ad-leaderboard"><span><script> document.write(atob("PHNjcmlwdD4KICBhdE9wdGlvbnMgPSB7CiAgICAna2V5JyA6ICdjN2I5ZjJhNzFiOGIzMmRlZjI1ZWU4Njc2NmE0MmZmZicsCiAgICAnZm9ybWF0JyA6ICdpZnJhbWUnLAogICAgJ2hlaWdodCcgOiA5MCwKICAgICd3aWR0aCcgOiA3MjgsCiAgICAncGFyYW1zJyA6IHt9CiAgfTsKPC9zY3JpcHQ+CjxzY3JpcHQgc3JjPSJodHRwczovL2NvbmR1Y3RpdmVicmVlZHMuY29tL2M3YjlmMmE3MWI4YjMyZGVmMjVlZTg2NzY2YTQyZmZmL2ludm9rZS5qcyI+PC9zY3JpcHQ+Cg==")); </script></span></div>
+        <!-- Channel filter pills -->
+        <div class="hl-channel-filter" id="hlChannelFilter">
+          <button class="hl-ch-btn active" onclick="setHighlightChannel(this,'all')">🌐 All Channels</button>
+          <button class="hl-ch-btn" onclick="setHighlightChannel(this,'skysports')">🏴󠁧󠁢󠁥󠁮󠁧󠁿 Sky Sports PL</button>
+          <button class="hl-ch-btn" onclick="setHighlightChannel(this,'tntsports')">📺 TNT Sports</button>
+          <button class="hl-ch-btn" onclick="setHighlightChannel(this,'mls')">🇺🇸 MLS</button>
+          <button class="hl-ch-btn" onclick="setHighlightChannel(this,'dazn')">⚽ DAZN Football</button>
+        </div>
+        <!-- Sky Sports PL -->
+        <div class="hl-section" id="hlSection-skysports">
+          <div class="hl-section-hd">
+            <span class="hl-section-icon">🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
+            <span class="hl-section-title">Sky Sports Premier League</span>
+            <a class="hl-channel-link" href="https://www.youtube.com/channel/UCNAf1k0yIjyGu3k9BwAg3lg" target="_blank" rel="noopener">View Channel →</a>
+          </div>
+          <div class="hl-video-grid" id="hlGrid-skysports"><div class="loading-state"><div class="spinner"></div><div>Loading…</div></div></div>
+        </div>
+        <!-- TNT Sports -->
+        <div class="hl-section" id="hlSection-tntsports">
+          <div class="hl-section-hd">
+            <span class="hl-section-icon">📺</span>
+            <span class="hl-section-title">TNT Sports</span>
+            <a class="hl-channel-link" href="https://www.youtube.com/channel/UC4i_9WvfPRTuRWEaWyfKuFw" target="_blank" rel="noopener">View Channel →</a>
+          </div>
+          <div class="hl-video-grid" id="hlGrid-tntsports"><div class="loading-state"><div class="spinner"></div><div>Loading…</div></div></div>
+        </div>
+        <!-- MLS -->
+        <div class="hl-section" id="hlSection-mls">
+          <div class="hl-section-hd">
+            <span class="hl-section-icon">🇺🇸</span>
+            <span class="hl-section-title">Major League Soccer</span>
+            <a class="hl-channel-link" href="https://www.youtube.com/channel/UCSZbXT5TLLW_i-5W8FZpFsg" target="_blank" rel="noopener">View Channel →</a>
+          </div>
+          <div class="hl-video-grid" id="hlGrid-mls"><div class="loading-state"><div class="spinner"></div><div>Loading…</div></div></div>
+        </div>
+        <!-- DAZN Football -->
+        <div class="hl-section" id="hlSection-dazn">
+          <div class="hl-section-hd">
+            <span class="hl-section-icon">⚽</span>
+            <span class="hl-section-title">DAZN Football</span>
+            <a class="hl-channel-link" href="https://www.youtube.com/channel/UCSZ21xyG8w_33KriMM69IxQ" target="_blank" rel="noopener">View Channel →</a>
+          </div>
+          <div class="hl-video-grid" id="hlGrid-dazn"><div class="loading-state"><div class="spinner"></div><div>Loading…</div></div></div>
+        </div>
+      </div>
+
+    </div><!-- /page-content -->
+
+    <!-- ══════════════════════════════
+         FOOTER
+    ══════════════════════════════ -->
+    <footer>
+      <div class="foot-inner">
+        <div class="foot-brand">
+          <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--white)">Footy<em style="color:var(--amber);font-style:normal">Live</em>.ca</div>
+          <p>Canada's home for live sports scores, transfer news, rankings, standings and match stats.</p>
+        </div>
+        <div class="foot-col">
+          <h4>View More</h4>
+          <a onclick="navigate('home')">🏠 Home</a>
+          <a onclick="navigate('scores')">📊 Live Scores</a>
+          <a onclick="navigate('schedule')">📅 Schedule</a>
+          <a onclick="navigate('transfers')">🔄 Transfers</a>
+          <a onclick="navigate('standings')">🏆 Standings</a>
+          <a onclick="navigate('rankings')">📈 Rankings</a>
+          <a onclick="navigate('calendar')">📆 Calendar</a>
+          <a onclick="navigate('highlights')">🎬 Highlights</a>
+        </div>
+          
+        <div class="foot-col">
+          <h4>Site</h4>
+          <a>Advertise</a><a>Privacy Policy</a>
+          <a>Terms of Use</a><a>Contact</a>
+        </div>
+      </div>
+      <div class="foot-bottom">
+        <p>© 2026 FootyLive.ca — All rights reserved.</p>
+        <p>FootyLive.ca is a canadian owned sports data website.</p>
+      </div>
+    </footer>
+
+  </div><!-- /main -->
+</div><!-- /shell -->
+
+<!-- ══════════════════════════════
+     MOBILE BOTTOM TABS
+══════════════════════════════ -->
+<div class="mobile-tabs">
+  <div class="mobile-tab active" id="mtab-home" onclick="navigate('home')"><span class="mt-icon">🏠</span>Home</div>
+  <div class="mobile-tab" id="mtab-scores" onclick="navigate('scores')"><span class="mt-icon">📊</span>Scores</div>
+  <div class="mobile-tab" id="mtab-schedule" onclick="navigate('schedule')"><span class="mt-icon">📅</span>Schedule</div>
+  <div class="mobile-tab" id="mtab-standings" onclick="navigate('standings')"><span class="mt-icon">🏆</span>Stands</div>
+  <div class="mobile-tab" id="mtab-transfers" onclick="navigate('transfers')"><span class="mt-icon">🔄</span>Transfers</div>
+</div>
+
+<!-- ══════════════════════════════
+     ALL MODALS
+══════════════════════════════ -->
+<div class="modal-overlay" id="teamModal" onclick="if(event.target===this)closeTeamModal()">
+  <div class="modal">
+    <button class="modal-x" onclick="closeTeamModal()">✕</button>
+    <div class="modal-hero" id="teamHero">
+      <div class="mh-photo-ph" id="teamLogoPh">🏟</div>
+      <div>
+        <div class="mh-name" id="teamName">Team</div>
+        <div class="mh-sub" id="teamSub"></div>
+        <div class="mh-badges" id="teamBadges"></div>
+      </div>
+    </div>
+    <div class="modal-tabs">
+      <div class="mtab active" onclick="openTmTab(this,'tmOverview')">📋 Overview</div>
+      <div class="mtab" onclick="openTmTab(this,'tmSquad')">👥 Squad</div>
+      <div class="mtab" onclick="openTmTab(this,'tmResults')">✅ Results</div>
+      <div class="mtab" onclick="openTmTab(this,'tmStats')">📊 Stats</div>
+      <div class="mtab" onclick="openTmTab(this,'tmTransfers')">🔄 Transfers</div>
+      <div class="mtab" onclick="openTmTab(this,'tmMedia')">🎬 Media</div>
+    </div>
+    <div class="modal-panel active" id="tmOverview"></div>
+    <div class="modal-panel" id="tmSquad"></div>
+    <div class="modal-panel" id="tmResults"></div>
+    <div class="modal-panel" id="tmStats"></div>
+    <div class="modal-panel" id="tmTransfers"></div>
+    <div class="modal-panel" id="tmMedia"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     REFEREE MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="refModal" onclick="if(event.target===this)closeRefModal()">
+  <div class="modal">
+    <button class="modal-x" onclick="closeRefModal()">✕</button>
+    <div class="modal-hero" id="refHero">
+      <div class="mh-photo-ph" id="refPhotoPh">🟡</div>
+      <div>
+        <div class="mh-name" id="refName">Referee</div>
+        <div class="mh-sub" id="refSub"></div>
+      </div>
+    </div>
+    <div class="modal-tabs">
+      <div class="mtab active" onclick="openRefTab(this,'rfOverview')">📋 Overview</div>
+      <div class="mtab" onclick="openRefTab(this,'rfStats')">📊 Statistics</div>
+      <div class="mtab" onclick="openRefTab(this,'rfGames')">🗓 Recent Games</div>
+    </div>
+    <div class="modal-panel active" id="rfOverview"></div>
+    <div class="modal-panel" id="rfStats"></div>
+    <div class="modal-panel" id="rfGames"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MANAGER MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="mgrModal" onclick="if(event.target===this)closeMgrModal()">
+  <div class="modal">
+    <button class="modal-x" onclick="closeMgrModal()">✕</button>
+    <div class="modal-hero" id="mgrHero">
+      <div class="mh-photo-ph" id="mgrPhotoPh">👔</div>
+      <div>
+        <div class="mh-name" id="mgrName">Manager</div>
+        <div class="mh-sub" id="mgrSub"></div>
+      </div>
+    </div>
+    <div class="modal-tabs">
+      <div class="mtab active" onclick="openMgrTab(this,'mgOverview')">📋 Overview</div>
+      <div class="mtab" onclick="openMgrTab(this,'mgCareer')">📋 Career</div>
+      <div class="mtab" onclick="openMgrTab(this,'mgGames')">🗓 Recent Games</div>
+    </div>
+    <div class="modal-panel active" id="mgOverview"></div>
+    <div class="modal-panel" id="mgCareer"></div>
+    <div class="modal-panel" id="mgGames"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     TOURNAMENT MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="tournModal" onclick="if(event.target===this)closeTournModal()">
+  <div class="modal modal-wide">
+    <button class="modal-x" onclick="closeTournModal()">✕</button>
+    <div class="modal-hero" id="tournHero">
+      <div class="mh-photo-ph" id="tournLogoPh">🏆</div>
+      <div>
+        <div class="mh-name" id="tournName">Tournament</div>
+        <div class="mh-sub" id="tournSub"></div>
+      </div>
+    </div>
+    <div class="modal-tabs">
+      <div class="mtab active" onclick="openTournTab(this,'tnOverview')">📋 Overview</div>
+      <div class="mtab" onclick="openTournTab(this,'tnStandings')">🏆 Standings</div>
+      <div class="mtab" onclick="openTournTab(this,'tnResults')">✅ Results</div>
+      <div class="mtab" onclick="openTournTab(this,'tnTopPlayers')">⭐ Top Players</div>
+      <div class="mtab" onclick="openTournTab(this,'tnBracket')">🪜 Bracket</div>
+      <div class="mtab" onclick="openTournTab(this,'tnTeams')">🏟 Teams</div>
+      <div class="mtab" onclick="openTournTab(this,'tnMedia')">🎬 Media</div>
+    </div>
+    <div class="modal-panel active" id="tnOverview"></div>
+    <div class="modal-panel" id="tnStandings"></div>
+    <div class="modal-panel" id="tnResults"></div>
+    <div class="modal-panel" id="tnTopPlayers"></div>
+    <div class="modal-panel" id="tnBracket"></div>
+    <div class="modal-panel" id="tnTeams"></div>
+    <div class="modal-panel" id="tnMedia"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     EVENT DETAIL MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="eventModal" onclick="if(event.target===this)closeEventModal()">
+  <div class="modal">
+    <button class="modal-x" onclick="closeEventModal()">✕</button>
+    <div class="ev-hero">
+      <div class="ev-league" id="evLeague">League</div>
+      <div class="ev-scoreboard">
+        <div class="ev-team">
+          <div id="evHomeCrest"></div>
+          <div class="ev-tname" id="evHomeName">Home</div>
+        </div>
+        <div class="ev-score-mid">
+          <div class="ev-score" id="evScore">— : —</div>
+          <div id="evStatusPill"></div>
+        </div>
+        <div class="ev-team">
+          <div id="evAwayCrest"></div>
+          <div class="ev-tname" id="evAwayName">Away</div>
+        </div>
+      </div>
+      <div class="ev-meta" id="evMeta"></div>
+    </div>
+    <div class="modal-tabs">
+      <div class="mtab active" onclick="openETab(this,'epSummary')">📋 Summary</div>
+      <div class="mtab" onclick="openETab(this,'epIncidents')">⚡ Incidents</div>
+      <div class="mtab" onclick="openETab(this,'epLineups')">👥 Lineups</div>
+      <div class="mtab" onclick="openETab(this,'epStats')">📊 Stats</div>
+      <div class="mtab" onclick="openETab(this,'epH2H')">🔁 H2H</div>
+      <div class="mtab" onclick="openETab(this,'epShotmap')">🎯 Shotmap</div>
+      <div class="mtab" onclick="openETab(this,'epBestPlayers')">⭐ Best Players</div>
+      <div class="mtab" onclick="openETab(this,'epForm')">📈 Form</div>
+      <div class="mtab" onclick="openETab(this,'epOdds')">💰 Odds</div>
+      <div class="mtab" onclick="openETab(this,'epVotes')">🗳 Votes</div>
+      <div class="mtab" onclick="openETab(this,'epMedia')">🎬 Media</div>
+    </div>
+    <div class="modal-panel active" id="epSummary"></div>
+    <div class="modal-panel" id="epIncidents"></div>
+    <div class="modal-panel" id="epLineups"></div>
+    <div class="modal-panel" id="epStats"></div>
+    <div class="modal-panel" id="epH2H"></div>
+    <div class="modal-panel" id="epShotmap"></div>
+    <div class="modal-panel" id="epBestPlayers"></div>
+    <div class="modal-panel" id="epForm"></div>
+    <div class="modal-panel" id="epOdds"></div>
+    <div class="modal-panel" id="epVotes"></div>
+    <div class="modal-panel" id="epMedia"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PLAYER MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="playerModal" onclick="if(event.target===this)closePlayerModal()">
+  <div class="modal">
+    <button class="modal-x" onclick="closePlayerModal()">✕</button>
+    <div class="player-hero" id="playerHero">
+      <div class="ph-photo-ph" id="playerPhotoPh">👤</div>
+      <div class="ph-info">
+        <div class="ph-name" id="playerName">Player</div>
+        <div class="ph-pos-team">
+          <span class="ph-pos" id="playerPosBadge"></span>
+          <span class="ph-team" id="playerTeamName"></span>
+        </div>
+        <div class="ph-pills" id="playerMetaPills"></div>
+      </div>
+      <div class="ph-stats-row" id="playerStatHeroes"></div>
+    </div>
+    <div class="modal-tabs">
+      <div class="mtab active" onclick="openPTab(this,'ppOverview')">📋 Overview</div>
+      <div class="mtab" onclick="openPTab(this,'ppAttributes')">🎯 Attributes</div>
+      <div class="mtab" onclick="openPTab(this,'ppCareer')">📊 Career</div>
+      <div class="mtab" onclick="openPTab(this,'ppSeasonStats')">📈 Season Stats</div>
+      <div class="mtab" onclick="openPTab(this,'ppRatings')">⭐ Ratings</div>
+      <div class="mtab" onclick="openPTab(this,'ppHeatmap')">🔥 Heatmap</div>
+      <div class="mtab" onclick="openPTab(this,'ppTransfers')">🔄 Transfers</div>
+      <div class="mtab" onclick="openPTab(this,'ppPenalties')">🥅 Penalties</div>
+      <div class="mtab" onclick="openPTab(this,'ppNational')">🌍 National</div>
+      <div class="mtab" onclick="openPTab(this,'ppGames')">🗓 Games</div>
+      <div class="mtab" onclick="openPTab(this,'ppMedia')">🎬 Media</div>
+    </div>
+    <div class="modal-panel active" id="ppOverview"></div>
+    <div class="modal-panel" id="ppAttributes"></div>
+    <div class="modal-panel" id="ppCareer"></div>
+    <div class="modal-panel" id="ppSeasonStats"></div>
+    <div class="modal-panel" id="ppRatings"></div>
+    <div class="modal-panel" id="ppHeatmap"></div>
+    <div class="modal-panel" id="ppTransfers"></div>
+    <div class="modal-panel" id="ppPenalties"></div>
+    <div class="modal-panel" id="ppNational"></div>
+    <div class="modal-panel" id="ppGames"></div>
+    <div class="modal-panel" id="ppMedia"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     VIDEO PLAYER MODAL
+══════════════════════════════════════ -->
+<div class="modal-overlay" id="videoModal" onclick="if(event.target===this)closeVideoModal()">
+  <div class="modal modal-video">
+    <button class="modal-x" onclick="closeVideoModal()">✕</button>
+    <div class="video-modal-header">
+      <div class="video-modal-title" id="videoModalTitle"></div>
+      <div class="video-modal-meta" id="videoModalMeta"></div>
+    </div>
+    <div class="video-wrap">
+      <iframe id="videoFrame" src="" frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- External Scripts — load order matters -->
+
+<!-- Scripts -->
+<script src="core.js"></script>
+<script src="app.js"></script>
+<script src="events.js"></script>
+<script src="player.js"></script>
+
+<script>
+// Sync mobile tabs with navigate()
+const _origNav = navigate;
+navigate = function(page) {
+  _origNav(page);
+  // Sidebar
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('nav-' + page)?.classList.add('active');
+  // Mobile tabs
+  document.querySelectorAll('.mobile-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('mtab-' + page)?.classList.add('active');
+  // Topbar title map
+  const titles = {
+    home:'Live <span>Scores</span>', scores:'Live <span>Scores</span>',
+    schedule:'Match <span>Schedule</span>', transfers:'Transfer <span>News</span>',
+    standings:'League <span>Standings</span>', rankings:'Sport <span>Rankings</span>',
+    calendar:'Event <span>Calendar</span>', search:'Search <span>Results</span>',
+    highlights:'Soccer <span>Highlights</span>', league:'League <span>Fixtures</span>'
+  };
+  const el = document.getElementById('topbarTitle');
+  if(el && titles[page]) el.innerHTML = titles[page];
+};
+// Update live pill in sidebar
+const _origSetHome = setHomeSport;
+setHomeSport = function(el, s) {
+  // Replace sport-strip active
+  document.querySelectorAll('#homeSportFilter .sport-pill').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  HOME_SPORT = s;
+  MATCH_FILTERS.home.status = 'all';
+  MATCH_FILTERS.home.league = 'all';
+  document.querySelectorAll('#homeStatusFilter .filter-btn').forEach((b,i)=>b.classList.toggle('active', i === 0));
+  const homeSel = document.getElementById('homeLeagueFilter');
+  if(homeSel) homeSel.value = 'all';
+  document.getElementById('homeQuickLeagues')?.querySelectorAll('.quick-league-btn').forEach(b=>b.classList.remove('active'));
+  loadHomeLive();
+  setTimeout(() => refreshMatchFilters('home'), 0);
+};
+// Hide sidebar on outside click (mobile)
+document.addEventListener('click', e => {
+  const nav = document.getElementById('sidenav');
+  if(window.innerWidth <= 600 && nav && !nav.contains(e.target)) nav.classList.remove('open');
+});
+// Match status + league filters
+const MATCH_FILTERS = {
+  home:   { status: 'all', league: 'all' },
+  scores: { status: 'all', league: 'all' }
+};
+
+function normFilterValue(v) {
+  return String(v || '').trim().toLowerCase().replace(/\s+/g,' ');
+}
+
+function getMatchLeague(card) {
+  const leagueEl = card.querySelector('.match-league');
+  const groupEl = card.closest('.match-group')?.querySelector('.mgh-name');
+  return (leagueEl?.textContent || groupEl?.textContent || 'Other').trim();
+}
+
+function getMatchStatus(card) {
+  const txt = card.textContent.toLowerCase();
+  if(card.querySelector('.s-live') || txt.includes('live') || /\b\d{1,3}'/.test(txt)) return 'live';
+  if(card.querySelector('.s-time') || txt.includes('not started') || txt.includes('scheduled') || txt.includes('starts')) return 'upcoming';
+  if(card.querySelector('.s-ft') || txt.includes(' full time') || txt.includes('ft')) return 'finished';
+  return 'upcoming';
+}
+
+function setMatchStatusFilter(scope, btn, status) {
+  MATCH_FILTERS[scope].status = status;
+  btn.parentElement.querySelectorAll('.status-pill').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  applyMatchFilters(scope);
+}
+
+function setQuickLeague(scope, btn, leagueKeyword) {
+  // Toggle: clicking active quick league = reset to all
+  const isActive = btn.classList.contains('active');
+  // Clear all quick league buttons for this scope
+  document.getElementById(scope + 'QuickLeagues')?.querySelectorAll('.quick-league-btn').forEach(b=>b.classList.remove('active'));
+  const sel = document.getElementById(scope === 'home' ? 'homeLeagueFilter' : 'scoresLeagueFilter');
+  if(isActive) {
+    // Deselect — reset to all
+    MATCH_FILTERS[scope].league = 'all';
+    if(sel) sel.value = 'all';
+  } else {
+    btn.classList.add('active');
+    // Find the matching league in the select or match cards
+    const box = document.getElementById(scope === 'home' ? 'homeLiveBox' : 'scoresBox');
+    const allLeagues = [...(box?.querySelectorAll('.match-card')||[])].map(getMatchLeague);
+    const match = allLeagues.find(l => normFilterValue(l).includes(leagueKeyword.toLowerCase()));
+    const val = match ? normFilterValue(match) : leagueKeyword;
+    MATCH_FILTERS[scope].league = val;
+    if(sel) sel.value = val;
+  }
+  applyMatchFilters(scope);
+}
+
+function setMatchLeagueFilter(scope, btn, league) {
+  MATCH_FILTERS[scope].league = league;
+  if(btn && btn.parentElement) {
+    btn.parentElement.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  // Also sync the select if present
+  const sel = document.getElementById(scope === 'home' ? 'homeLeagueFilter' : 'scoresLeagueFilter');
+  if(sel) sel.value = league;
+  applyMatchFilters(scope);
+}
+
+function rebuildLeagueButtons(scope) {
+  const box = document.getElementById(scope === 'home' ? 'homeLiveBox' : 'scoresBox');
+  const sel = document.getElementById(scope === 'home' ? 'homeLeagueFilter' : 'scoresLeagueFilter');
+  if(!box || !sel) return;
+
+  // Get unique league names from rendered match cards
+  const leagues = [...box.querySelectorAll('.match-card')]
+    .map(getMatchLeague)
+    .filter(Boolean)
+    .filter((v,i,a)=>a.findIndex(x=>normFilterValue(x) === normFilterValue(v)) === i)
+    .sort((a,b)=>a.localeCompare(b));
+
+  // If current filter league no longer exists, reset to all
+  if(MATCH_FILTERS[scope].league !== 'all' && !leagues.some(l=>normFilterValue(l) === MATCH_FILTERS[scope].league)) {
+    MATCH_FILTERS[scope].league = 'all';
+  }
+
+  // Rebuild the <select> options
+  const currentVal = MATCH_FILTERS[scope].league;
+  sel.innerHTML = '<option value="all">All Leagues</option>';
+  leagues.forEach(league => {
+    const value = normFilterValue(league);
+    const opt = document.createElement('option');
+    opt.value = value;
+    opt.textContent = league;
+    if(value === currentVal) opt.selected = true;
+    sel.appendChild(opt);
+  });
+  if(currentVal === 'all') sel.value = 'all';
+  // Sync quick league buttons to active state
+  const ql = document.getElementById(scope + 'QuickLeagues');
+  if(ql) {
+    ql.querySelectorAll('.quick-league-btn').forEach(btn => {
+      const kw = btn.getAttribute('onclick')?.match(/,'([^']+)'\)/)?.[1] || '';
+      const hasMatch = leagues.some(l => normFilterValue(l).includes(kw));
+      btn.style.opacity = hasMatch ? '1' : '0.35';
+      btn.disabled = !hasMatch;
+      btn.classList.toggle('active', currentVal !== 'all' && hasMatch && leagues.some(l => normFilterValue(l).includes(kw) && normFilterValue(l) === currentVal));
+    });
+  }
+}
+
+function setMatchLeagueFilterSelect(scope, sel) {
+  MATCH_FILTERS[scope].league = sel.value;
+  applyMatchFilters(scope);
+}
+
+function applyMatchFilters(scope) {
+  const box = document.getElementById(scope === 'home' ? 'homeLiveBox' : 'scoresBox');
+  if(!box) return;
+
+  const filters = MATCH_FILTERS[scope];
+  let visibleCount = 0;
+  box.querySelectorAll('.match-card').forEach(card => {
+    const status = getMatchStatus(card);
+    const league = normFilterValue(getMatchLeague(card));
+    const statusMatch = filters.status === 'all' || filters.status === status;
+    const leagueMatch = filters.league === 'all' || filters.league === league;
+    const visible = statusMatch && leagueMatch;
+    card.style.display = visible ? '' : 'none';
+    if(visible) visibleCount++;
+  });
+
+  box.querySelectorAll('.match-group').forEach(group => {
+    const hasVisibleCards = [...group.querySelectorAll('.match-card')].some(card => card.style.display !== 'none');
+    group.style.display = hasVisibleCards ? '' : 'none';
+  });
+
+  let empty = box.querySelector('.filter-empty-state');
+  if(!empty) {
+    empty = document.createElement('div');
+    empty.className = 'empty-state filter-empty-state';
+    empty.style.display = 'none';
+    empty.innerHTML = '<div class="empty-icon">🔎</div>No games match these filters.';
+    box.appendChild(empty);
+  }
+  empty.style.display = box.querySelector('.match-card') && visibleCount === 0 ? '' : 'none';
+}
+
+function refreshMatchFilters(scope) {
+  rebuildLeagueButtons(scope);
+  applyMatchFilters(scope);
+}
+
+function watchMatchBox(scope) {
+  const box = document.getElementById(scope === 'home' ? 'homeLiveBox' : 'scoresBox');
+  if(!box) return;
+  const observer = new MutationObserver(() => refreshMatchFilters(scope));
+  observer.observe(box, { childList: true, subtree: true });
+  refreshMatchFilters(scope);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  watchMatchBox('home');
+  watchMatchBox('scores');
+});
+
+const _origFilterScoresSport = filterScoresSport;
+filterScoresSport = function(el, s) {
+  document.querySelectorAll('#scoresSportFilter .sport-pill').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  MATCH_FILTERS.scores.status = 'all';
+  MATCH_FILTERS.scores.league = 'all';
+  document.querySelectorAll('#scoresStatusFilter .filter-btn').forEach((b,i)=>b.classList.toggle('active', i === 0));
+  const scoresSel = document.getElementById('scoresLeagueFilter');
+  if(scoresSel) scoresSel.value = 'all';
+  document.getElementById('scoresQuickLeagues')?.querySelectorAll('.quick-league-btn').forEach(b=>b.classList.remove('active'));
+  _origFilterScoresSport(el, s);
+  setTimeout(() => refreshMatchFilters('scores'), 0);
+};
+
+// League navigation — uses a single shared page-league div
+function navigateLeague(key) {
+  navigate('league');
+  // Override nav active state: clear all, highlight the correct league item
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('nav-league-' + key)?.classList.add('active');
+  if(typeof bootLeaguePage === 'function') bootLeaguePage(key);
+}
+
+// Close video modal on Escape
+document.addEventListener('keydown', function(e) {
+  if(e.key === 'Escape' && document.getElementById('videoModal')?.classList.contains('open')) {
+    if(typeof closeVideoModal === 'function') closeVideoModal();
+  }
+});
+
+// Update live pill
+const _origRefreshLive = refreshLive;
+</script>
+
+<script>
+/* Keep third-party ad iframes inside their ad-slot containers on every screen size. */
+(function(){
+  function fitAdSlot(slot) {
+    if(!slot) return;
+    const iframe = slot.querySelector('iframe');
+    if(!iframe) return;
+
+    const style = window.getComputedStyle(slot);
+    const padX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    const padY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+    const available = Math.max(0, slot.clientWidth - padX);
+
+    const attrW = parseInt(iframe.getAttribute('width'), 10);
+    const attrH = parseInt(iframe.getAttribute('height'), 10);
+    const naturalW = attrW || (slot.classList.contains('ad-leaderboard') ? 728 : 300);
+    const naturalH = attrH || (slot.classList.contains('ad-leaderboard') ? 90 : 250);
+
+    iframe.style.setProperty('width', naturalW + 'px', 'important');
+    iframe.style.setProperty('height', naturalH + 'px', 'important');
+    iframe.style.setProperty('max-width', 'none', 'important');
+    iframe.style.border = '0';
+    iframe.style.display = 'block';
+    iframe.style.margin = '0 auto';
+    iframe.style.transformOrigin = 'top center';
+
+    if(available > 0 && naturalW > available) {
+      const scale = available / naturalW;
+      iframe.style.transform = `scale(${scale})`;
+      slot.style.minHeight = Math.ceil((naturalH * scale) + padY) + 'px';
+    } else {
+      iframe.style.transform = 'none';
+      slot.style.minHeight = '';
+    }
+  }
+
+  function fitAllAds() {
+    document.querySelectorAll('.ad-slot').forEach(fitAdSlot);
+  }
+
+  window.addEventListener('load', fitAllAds);
+  window.addEventListener('resize', fitAllAds);
+  document.addEventListener('DOMContentLoaded', fitAllAds);
+
+  const observer = new MutationObserver(fitAllAds);
+  observer.observe(document.documentElement, { childList: true, subtree: true });
+  setTimeout(fitAllAds, 300);
+  setTimeout(fitAllAds, 1200);
+})();
+</script>
+
+</body>
+</html>
